@@ -85,7 +85,7 @@ app.get("/apps", async (req, res) => {
 * Example request: `/apps?limit=5` 🔹 will return only the first 5 apps.
 
 ---
-## **"[GET → FIND → PROJECT → LIMIT & SKIP]"** ⏱️↔️
+## **"[GET → FIND → PROJECT → LIMIT → SKIP]"** ⏱️↔️
 
 ### USED: TO GET LIMITED DATA WITH PAGINATION AND SPECIFIC FIELDS
 
@@ -235,6 +235,7 @@ app.get("/crops/:id", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 
 ```
+
 
 
 
