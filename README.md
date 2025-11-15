@@ -1,7 +1,3 @@
-Absolutely! Here’s the **full updated `.md` file** with your app routes section simplified, and relevant emojis for clarity:
-
----
-
 # 🚀 Backend — Full Setup Guide (Node.js + Express + MongoDB)
 
 This guide walks you through the complete process of creating the **Hero Apps Backend Server**, including Express setup, MongoDB connection, middlewares, routes, and environment variables.
