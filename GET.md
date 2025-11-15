@@ -52,6 +52,7 @@ app.get("/allcrops", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 
 ---
+
 ## **"[GET → FIND → PROJECT → LIMIT]"** ⏱️
 
 ### USED: TO GET LIMITED DATA WITH SPECIFIC FIELDS
@@ -84,8 +85,7 @@ app.get("/apps", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 * Example request: `/apps?limit=5` 🔹 will return only the first 5 apps.
 
-```
-```
+---
 
 ## **"[GET → FIND → SORT]"** 🔃
 
@@ -203,5 +203,6 @@ app.get("/crops/:id", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 
 ```
+
 
 
