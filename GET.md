@@ -18,7 +18,7 @@ app.get("/allcrops", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves data from the `cropsCollection` in MongoDB.
+* Retrieves all data from the `cropsCollection` in MongoDB.
 * Returns the data in JSON format along with a ✅ success message.
 * Responds with a ❌ `500` status code if an error occurs.
 
@@ -44,7 +44,7 @@ app.get("/allcrops", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves data from the `cropsCollection` in MongoDB.
+* Retrieves all data from the `cropsCollection` in MongoDB.
 * Sorts the data by `createdAt` in descending order (`-1`) 🔽.
 * Returns the data in JSON format along with a ✅ success message.
 * Responds with a ❌ `500` status code if an error occurs.
@@ -61,7 +61,6 @@ app.get("/allcrops", async (req, res) => {
 app.get("/cropsSearch", async (req, res) => {
   try {
     const searchText = req.query.search;
-    console.log(searchText);
     const result = await cropsCollection
       .find({ name: { $regex: searchText, $options: "i" } })
       .toArray();
@@ -75,16 +74,45 @@ app.get("/cropsSearch", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves data from the `cropsCollection` in MongoDB based on a search query.
-* The search is case-insensitive (`$options: "i"`).
-* Returns the data in JSON format along with a ✅ success message.
-* Responds with a ❌ `500` status code if an error occurs.
+* Retrieves data based on a search query from `cropsCollection`.
+* Case-insensitive search (`$options: "i"`).
+* Returns JSON data along with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
+
+---
+
+## **"[GET → QUERY → FIND BY EMAIL]"** 📧
+
+### USED: TO GET DATA BY OWNER EMAIL
+
+### Endpoint: `/myposts`
+
+```javascript
+app.get("/myposts", async (req, res) => {
+  try {
+    const email = req.query.email;
+    const filter = { "owner.ownerEmail": email };
+
+    const result = await cropsCollection.find(filter).toArray();
+    res.status(200).json({ message: "✅ Data retrieved for the given email", data: result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "❌ Internal Server Error" });
+  }
+});
+```
+
+### 📝 Notes:
+
+* Retrieves data filtered by `owner.ownerEmail` from `cropsCollection`.
+* Returns JSON data along with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
 
 ---
 
 ## **"[GET → QUERY → FINDONE]"** 🔎
 
-### USED: TO GET SPECIFIC DATA USING PARAMETERS
+### USED: TO GET SPECIFIC DATA USING PARAMS
 
 ### Endpoint: `/crops/:id`
 
@@ -106,7 +134,7 @@ app.get("/crops/:id", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves specific data from the `cropsCollection` in MongoDB based on the provided `id`.
-* The `id` is converted to `ObjectId` for proper MongoDB query filtering.
-* Returns the data in JSON format along with a ✅ success message.
-* Responds with a ❌ `500` status code if an error occurs.
+* Retrieves specific data from `cropsCollection` using `_id`.
+* Converts `id` to `ObjectId` for MongoDB queries.
+* Returns JSON data along with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
