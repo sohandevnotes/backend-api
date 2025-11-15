@@ -52,6 +52,40 @@ app.get("/allcrops", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 
 ---
+## **"[GET → FIND → PROJECT → LIMIT]"** ⏱️
+
+### USED: TO GET LIMITED DATA WITH SPECIFIC FIELDS
+
+### Endpoint: `/apps`
+
+```javascript
+app.get("/apps", async (req, res) => {
+  try {
+    const { limit } = req.query;
+    console.log(limit);
+    const apps = await appsCollection
+      .find()
+      .limit(parseInt(limit))
+      .project({ description: 0, ratings: 0 })
+      .toArray();
+    res.status(200).json({ message: "✅ Limited apps retrieved with selected fields", data: apps });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "❌ Internal Server Error" });
+  }
+});
+````
+
+### 📝 Notes:
+
+* Retrieves data from `appsCollection` with a **limit** based on query parameter.
+* Excludes `description` and `ratings` fields using `.project()`.
+* Returns JSON data with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
+* Example request: `/apps?limit=5` 🔹 will return only the first 5 apps.
+
+```
+```
 
 ## **"[GET → FIND → SORT]"** 🔃
 
@@ -169,4 +203,5 @@ app.get("/crops/:id", async (req, res) => {
 * Responds with ❌ `500` if an error occurs.
 
 ```
+
 
