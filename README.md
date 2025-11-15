@@ -158,7 +158,6 @@ Example:
 
 ```
 PORT=3000
-SECRET_KEY=mysecret123
 ```
 
 ### 📌 Add DOTENV to `index.js`
