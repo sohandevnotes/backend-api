@@ -21,11 +21,14 @@ app.get("/apps", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-```
+````
 
 ---
 
 ### Explanation
+
 * **Purpose**: The `GET` method is designed to retrieve information from the server. In this case, it fetches a list of apps stored in the `appsCollection` from a MongoDB database.
 * **Response Format**: The data is returned in JSON format, which is a common format for APIs.
 * **Error Handling**: If there is an issue with fetching the data (e.g., database connection failure), the server responds with a `500` status code and an error message.
+
+```
