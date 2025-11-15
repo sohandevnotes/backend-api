@@ -24,14 +24,43 @@ app.get("/allcrops", async (req, res) => {
 
 ---
 
-## **"[GET → FIND → SORT]"** 🔃
+## **"[GET → FIND → PROJECT]"** 📂
 
-### USED: TO GET ALL DATA WITH SORTING
+### USED: TO GET ALL DATA WITH SPECIFIC FIELDS
 
 ### Endpoint: `/allcrops`
 
 ```javascript
 app.get("/allcrops", async (req, res) => {
+  try {
+    const crops = await cropsCollection
+      .find()
+      .project({ description: 0, ratings: 0 })
+      .toArray();
+    res.status(200).json({ message: "✅ Data retrieved with selected fields", data: crops });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "❌ Internal Server Error" });
+  }
+});
+```
+
+### 📝 Notes:
+
+* Retrieves all data from `cropsCollection` but excludes `description` and `ratings`.
+* Returns JSON data with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
+
+---
+
+## **"[GET → FIND → SORT]"** 🔃
+
+### USED: TO GET ALL DATA WITH SORTING
+
+### Endpoint: `/allcrops/sorted`
+
+```javascript
+app.get("/allcrops/sorted", async (req, res) => {
   try {
     const crops = await cropsCollection.find().sort({ createdAt: -1 }).toArray();
     res.status(200).json({ message: "✅ Apps retrieved and sorted by creation date", data: crops });
@@ -44,10 +73,10 @@ app.get("/allcrops", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves all data from the `cropsCollection` in MongoDB.
-* Sorts the data by `createdAt` in descending order (`-1`) 🔽.
-* Returns the data in JSON format along with a ✅ success message.
-* Responds with a ❌ `500` status code if an error occurs.
+* Retrieves all data from `cropsCollection`.
+* Sorts by `createdAt` in descending order 🔽.
+* Returns JSON data with a ✅ success message.
+* Responds with ❌ `500` if an error occurs.
 
 ---
 
@@ -76,7 +105,7 @@ app.get("/cropsSearch", async (req, res) => {
 
 * Retrieves data based on a search query from `cropsCollection`.
 * Case-insensitive search (`$options: "i"`).
-* Returns JSON data along with a ✅ success message.
+* Returns JSON data with a ✅ success message.
 * Responds with ❌ `500` if an error occurs.
 
 ---
@@ -104,8 +133,8 @@ app.get("/myposts", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves data filtered by `owner.ownerEmail` from `cropsCollection`.
-* Returns JSON data along with a ✅ success message.
+* Retrieves data filtered by `owner.ownerEmail`.
+* Returns JSON data with a ✅ success message.
 * Responds with ❌ `500` if an error occurs.
 
 ---
@@ -134,7 +163,10 @@ app.get("/crops/:id", async (req, res) => {
 
 ### 📝 Notes:
 
-* Retrieves specific data from `cropsCollection` using `_id`.
-* Converts `id` to `ObjectId` for MongoDB queries.
-* Returns JSON data along with a ✅ success message.
+* Retrieves specific data using `_id`.
+* Converts `id` to `ObjectId` for proper MongoDB queries.
+* Returns JSON data with a ✅ success message.
 * Responds with ❌ `500` if an error occurs.
+
+```
+
