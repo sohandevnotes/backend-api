@@ -1,6 +1,6 @@
 # 🚀 Backend — Full Setup Guide (Node.js + Express + MongoDB)
 
-This guide walks you through the complete process of creating the **Hero Apps Backend Server**, including Express setup, MongoDB connection, middlewares, routes, and environment variables.
+This guide walks you through the complete process of creating the **Backend Server**, including Express setup, MongoDB connection, middlewares, routes, and environment variables.
 
 By the end of this guide, your project will match the **final backend code**.
 
